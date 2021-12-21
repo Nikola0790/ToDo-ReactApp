@@ -20,6 +20,19 @@ const Main = () => {
     event.preventDefault();
   };
 
+  const deleteTask = (index) => {
+    let newArr = [];
+    for (let i = 0; i < arr.length; i++) {
+      if (index !== i) {
+        newArr[newArr.length] = arr[i];
+      }
+    }
+    console.log(newArr);
+    setArr(newArr);
+  };
+
+  console.log(arr);
+
   return (
     <div className="container">
       <h1>My Todos</h1>
@@ -51,7 +64,7 @@ const Main = () => {
                 </div>
                 <div className="listBtt">
                   <button>Complete</button>
-                  <button>Delete</button>
+                  <button onClick={() => deleteTask(i)}>Delete</button>
                 </div>
               </li>
             );
