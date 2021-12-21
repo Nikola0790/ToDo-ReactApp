@@ -1,0 +1,71 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: #333333;
+  color: white;
+}
+.container {
+  width: 70%;
+  margin: 0 auto;
+}
+h1 {
+  margin-top: 50px;
+  text-align: center;
+}
+.inputEl {
+  background-color: #444444;
+  padding: 30px;
+  position: relative;
+  margin: 25px 0;
+}
+input {
+  margin-right: 10px;
+  padding: 10px 15px;
+  border-radius: 15px;
+  box-sizing: border-box;
+  outline: none;
+}
+input[type="text"]:focus {
+  border: 3px solid #ff9903;
+}
+button {
+  position: absolute;
+  right: 0;
+  margin-right: 30px;
+  padding: 10px 15px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  background-color: #ff9903;
+}
+.taskList ul li {
+  background-color: #444444;
+  margin-bottom: 3px;
+  padding: 25px 30px;
+  display: flex;
+  position: relative;
+}
+.listBtt {
+  position: absolute;
+  right: 0;
+}
+.listBtt button {
+  position: unset;
+  background-color: white;
+}
+.listBtt button:first-child {
+  color: green;
+  border: 1px solid green;
+}
+.listBtt button:last-child {
+  color: red;
+  border: 1px solid red;
+}
+.name {
+  font-size: 26px;
+  color: #ff9903;
+}
