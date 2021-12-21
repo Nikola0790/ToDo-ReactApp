@@ -69,3 +69,12 @@ button {
   font-size: 26px;
   color: #ff9903;
 }
+.completed p {
+  text-decoration: line-through;
+  color: #75716a;
+}
+.completed button:first-child {
+  background-color: #75716a;
+  border: none;
+  color: #373636;
+}
