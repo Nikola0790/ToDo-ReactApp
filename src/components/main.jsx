@@ -27,10 +27,21 @@ const Main = () => {
         newArr[newArr.length] = arr[i];
       }
     }
-    console.log(newArr);
     setArr(newArr);
   };
 
+  const completedTask = (index) => {
+    let newArr = [];
+    for (let i = 0; i < arr.length; i++) {
+      if (index !== i) {
+        newArr[newArr.length] = arr[i];
+      } else {
+        let completed = true;
+        newArr[newArr.length] = { ...arr[i], completed };
+      }
+    }
+    setArr(newArr);
+  };
   console.log(arr);
 
   return (
@@ -57,13 +68,16 @@ const Main = () => {
         <ul>
           {arr.map((item, i) => {
             return (
-              <li key={i}>
+              <li
+                key={i}
+                className={item.completed ? "completed" : "not_completed"}
+              >
                 <div>
                   <p className="name">{item.name}</p>
                   <p>{item.description}</p>
                 </div>
                 <div className="listBtt">
-                  <button>Complete</button>
+                  <button onClick={() => completedTask(i)}>Complete</button>
                   <button onClick={() => deleteTask(i)}>Delete</button>
                 </div>
               </li>
