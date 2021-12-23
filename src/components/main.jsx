@@ -1,59 +1,90 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./main.css";
 
 const Main = () => {
-  const [name, setName] = useState({
-    name: "",
-  });
+  const [name, setName] = useState({ name: "" });
   const [desc, setDesc] = useState({ description: "", completed: false });
-  const [arr, setArr] = useState([]);
+  const [arr, setArr] = useState([]); // we use (const arr) in useEffect as dependence for a signal when something changed.
+  const [locStorage, setLocStorage] = useState([]);
 
+  // take name from input field
   const handleName = (event) => {
     setName({ name: event.target.value });
   };
+
+  // take description from input field
   const handleDescription = (event) => {
     setDesc({ description: event.target.value, completed: false });
   };
 
-  const handleSubmit = (event) => {
-    setArr([...arr, { ...name, ...desc }]);
+  const addTask = (event) => {
+    if (name.name === "") {
+      alert("NAME IS REQUIRED");
+    } else if (desc.description === "") {
+      alert("DESCRIPTION IS REQUIRED");
+    } else {
+      setArr([...locStorage, { ...name, ...desc }]);
+      localStorage.setItem(
+        "name",
+        JSON.stringify([...locStorage, { ...name, ...desc }])
+      );
+    }
+    setName({ name: "" });
+    setDesc({ description: "", completed: false });
     event.preventDefault();
   };
 
   const deleteTask = (index) => {
+    localStorage.removeItem("name");
+
     let newArr = [];
-    for (let i = 0; i < arr.length; i++) {
+    for (let i = 0; i < locStorage.length; i++) {
       if (index !== i) {
-        newArr[newArr.length] = arr[i];
+        newArr[newArr.length] = locStorage[i];
       }
     }
+    setLocStorage(newArr);
     setArr(newArr);
   };
 
   const completedTask = (index) => {
+    localStorage.removeItem("name");
+
     let newArr = [];
-    for (let i = 0; i < arr.length; i++) {
+    for (let i = 0; i < locStorage.length; i++) {
       if (index !== i) {
-        newArr[newArr.length] = arr[i];
+        newArr[newArr.length] = locStorage[i];
       } else {
         let completed = true;
-        newArr[newArr.length] = { ...arr[i], completed };
+        newArr[newArr.length] = { ...locStorage[i], completed };
       }
     }
+    setLocStorage(newArr);
     setArr(newArr);
   };
-  console.log(arr);
+
+  //////////////////////////////////////
+
+  useEffect(() => {
+    if (!!localStorage.getItem("name")) {
+      setLocStorage(JSON.parse(localStorage.getItem("name")));
+    } else {
+      localStorage.setItem("name", JSON.stringify(locStorage));
+      setLocStorage(JSON.parse(localStorage.getItem("name")));
+    }
+  }, [arr]);
 
   return (
     <div className="container">
       <h1>My Todos</h1>
       <div className="inputEl">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={addTask}>
           <input
             type="text"
             value={name.name}
             placeholder="Name"
             onChange={handleName}
+            maxLength="50"
           />
           <input
             type="text"
@@ -66,13 +97,13 @@ const Main = () => {
       </div>
       <div className="taskList">
         <ul>
-          {arr.map((item, i) => {
+          {locStorage.map((item, i) => {
             return (
               <li
                 key={i}
                 className={item.completed ? "completed" : "not_completed"}
               >
-                <div>
+                <div className="text">
                   <p className="name">{item.name}</p>
                   <p>{item.description}</p>
                 </div>
