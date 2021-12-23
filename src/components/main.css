@@ -5,7 +5,7 @@
 }
 body {
   background-color: #333333;
-  color: white;
+  color: #ffffff;
 }
 .container {
   width: 70%;
@@ -39,7 +39,7 @@ button {
   border-radius: 25px;
   border: none;
   cursor: pointer;
-  color: white;
+  color: #ffffff;
   background-color: #ff9903;
 }
 .taskList ul li {
@@ -47,6 +47,7 @@ button {
   margin-bottom: 3px;
   padding: 25px 30px;
   display: flex;
+  justify-content: space-between;
   position: relative;
 }
 .listBtt {
@@ -55,15 +56,15 @@ button {
 }
 .listBtt button {
   position: unset;
-  background-color: white;
+  background-color: #ffffff;
 }
 .listBtt button:first-child {
-  color: green;
-  border: 1px solid green;
+  color: #008000;
+  border: 1px solid #008000;
 }
 .listBtt button:last-child {
-  color: red;
-  border: 1px solid red;
+  color: #ff0000;
+  border: 1px solid #ff0000;
 }
 .name {
   font-size: 26px;
@@ -77,4 +78,49 @@ button {
   background-color: #75716a;
   border: none;
   color: #373636;
+}
+.text {
+  margin-right: 50%;
+  word-break: break-all;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .container {
+    width: 90%;
+  }
+}
+@media (max-width: 769px) {
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  input {
+    text-align: center;
+    margin: 0;
+  }
+  input:first-child {
+    margin-bottom: 10px;
+  }
+  form button {
+    position: unset;
+    margin: 10px 0 0 0;
+  }
+
+  .listBtt {
+    position: unset;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .listBtt button {
+    margin: 0;
+  }
+  .listBtt button:first-child {
+    margin-bottom: 10px;
+  }
+  .text {
+    margin-right: 5%;
+  }
 }
