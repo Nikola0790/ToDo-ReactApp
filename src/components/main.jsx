@@ -75,11 +75,12 @@ const Main = () => {
   }, [arr]);
 
   return (
-    <div className="container">
+    <div className="container" data-testid="todo-1">
       <h1>My Todos</h1>
       <div className="inputEl">
         <form onSubmit={addTask}>
           <input
+            data-testid="name-input"
             type="text"
             value={name.name}
             placeholder="Name"
@@ -87,12 +88,13 @@ const Main = () => {
             maxLength="50"
           />
           <input
+            data-testid="text-input"
             type="text"
             value={desc.description}
             onChange={handleDescription}
             placeholder="Description"
           />
-          <button>Add Todo</button>
+          <button data-testid="submit-button">Add Todo</button>
         </form>
       </div>
       <div className="taskList">
@@ -101,6 +103,7 @@ const Main = () => {
             return (
               <li
                 key={i}
+                data-testid="todo"
                 className={item.completed ? "completed" : "not_completed"}
               >
                 <div className="text">
